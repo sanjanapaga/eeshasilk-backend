@@ -22,6 +22,12 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 # Copy application source
 COPY . /var/www/html
 
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Install dependencies
+RUN composer install --no-dev --optimize-autoloader
+
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html
 
