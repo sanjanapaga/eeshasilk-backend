@@ -226,6 +226,8 @@ class Database extends Config
             $this->default['database'] = ltrim($dbconfig['path'], '/');
             $this->default['port']     = $dbconfig['port'] ?? 5432;
             $this->default['DBDriver'] = 'Postgre';
+            $this->default['charset']  = 'utf8';
+            $this->default['DBCollat'] = 'utf8_general_ci';
         }
     }
 }
