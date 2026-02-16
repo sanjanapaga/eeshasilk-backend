@@ -34,7 +34,7 @@ class Cors extends BaseConfig
          *   - ['http://localhost:8080']
          *   - ['https://www.example.com']
          */
-        'allowedOrigins' => ['*'],
+        'allowedOrigins' => ['*', 'https://eeshasilk-frontend-amzo.vercel.app', 'https://eeshasilk-frontend.vercel.app', 'http://localhost:3000'],
 
         /**
          * Origin regex patterns for the `Access-Control-Allow-Origin` header.
