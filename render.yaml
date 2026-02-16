@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: eshasilk-backend
+    env: docker
+    context: .
+    plan: free
+    envVars:
+      - key: CI_ENVIRONMENT
+        value: production
+      - key: database_url
+        fromDatabase:
+          name: eshasilk-db
+          property: connectionString
+
+databases:
+  - name: eshasilk-db
+    databaseName: eshasilk
+    user: eshasilk
+    plan: free

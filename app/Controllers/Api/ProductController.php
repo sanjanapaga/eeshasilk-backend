@@ -13,11 +13,16 @@ class ProductController extends ResourceController
 
     private function ensureImageUrl(&$product)
     {
+        $base = rtrim(config('App')->baseURL, '/');
+
         if (!empty($product['image'])) {
             if (strpos($product['image'], 'http://') === 0 || strpos($product['image'], 'https://') === 0) {
                 $product['image_url'] = $product['image'];
             } else {
-                $product['image_url'] = base_url($product['image']);
+                // build url then ensure host matches configured baseURL (localhost vs 127.0.0.1)
+                $url = base_url($product['image']);
+                // replace ipv4 loopback with hostname from baseURL
+                $product['image_url'] = preg_replace('#https?://[^/]+#', $base, $url);
             }
         }
 
@@ -26,7 +31,8 @@ class ProductController extends ResourceController
                 if (strpos($img['image_path'], 'http://') === 0 || strpos($img['image_path'], 'https://') === 0) {
                     $img['url'] = $img['image_path'];
                 } else {
-                    $img['url'] = base_url($img['image_path']);
+                    $url = base_url($img['image_path']);
+                    $img['url'] = preg_replace('#https?://[^/]+#', $base, $url);
                 }
             }
         }
@@ -36,7 +42,8 @@ class ProductController extends ResourceController
                 if (strpos($vid['video_path'], 'http://') === 0 || strpos($vid['video_path'], 'https://') === 0) {
                     $vid['url'] = $vid['video_path'];
                 } else {
-                    $vid['url'] = base_url($vid['video_path']);
+                    $url = base_url($vid['video_path']);
+                    $vid['url'] = preg_replace('#https?://[^/]+#', $base, $url);
                 }
             }
         }
