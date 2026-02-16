@@ -29,8 +29,8 @@ class CreateUsers extends Migration
                 'constraint' => '255',
             ],
             'role' => [
-                'type'       => 'ENUM',
-                'constraint' => ['admin', 'user'],
+                'type'       => 'VARCHAR',
+                'constraint' => '20',
                 'default'    => 'user',
             ],
             'created_at' => [

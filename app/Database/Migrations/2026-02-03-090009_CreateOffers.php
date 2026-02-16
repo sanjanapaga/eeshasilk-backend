@@ -21,8 +21,8 @@ class CreateOffers extends Migration
                 'unique'     => true,
             ],
             'type' => [
-                'type'       => 'ENUM',
-                'constraint' => ['percentage', 'fixed', 'shipping'],
+                'type'       => 'VARCHAR',
+                'constraint' => '20',
                 'default'    => 'percentage',
             ],
             'discount' => [
