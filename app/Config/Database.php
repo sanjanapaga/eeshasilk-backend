@@ -200,5 +200,16 @@ class Database extends Config
         if (ENVIRONMENT === 'testing') {
             $this->defaultGroup = 'tests';
         }
+
+        // Render Database Connection
+        if ($url = getenv('database_url')) {
+            $dbconfig = parse_url($url);
+            $this->default['hostname'] = $dbconfig['host'];
+            $this->default['username'] = $dbconfig['user'];
+            $this->default['password'] = $dbconfig['pass'];
+            $this->default['database'] = ltrim($dbconfig['path'], '/');
+            $this->default['port']     = $dbconfig['port'] ?? 5432;
+            $this->default['DBDriver'] = 'Postgre';
+        }
     }
 }
