@@ -203,6 +203,21 @@ class Database extends Config
 
         // Render Database Connection
         $url = getenv('database_url') ?: getenv('DATABASE_URL');
+        
+        // Debugging for Render
+        if (php_sapi_name() === 'cli') {
+            echo "DEBUG: Checking for database_url...\n";
+            if ($url) {
+                echo "DEBUG: Found database URL (length: " . strlen($url) . ")\n";
+                $dbconfig = parse_url($url);
+                echo "DEBUG: Host: " . ($dbconfig['host'] ?? 'NONE') . "\n";
+            } else {
+                echo "DEBUG: No database_url found!\n";
+                // Print available env keys (safe)
+                echo "DEBUG: Env Keys: " . implode(', ', array_keys($_SERVER)) . "\n";
+            }
+        }
+
         if ($url) {
             $dbconfig = parse_url($url);
             $this->default['hostname'] = $dbconfig['host'];
