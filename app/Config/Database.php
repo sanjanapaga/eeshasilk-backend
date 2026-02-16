@@ -202,7 +202,8 @@ class Database extends Config
         }
 
         // Render Database Connection
-        if ($url = getenv('database_url')) {
+        $url = getenv('database_url') ?: getenv('DATABASE_URL');
+        if ($url) {
             $dbconfig = parse_url($url);
             $this->default['hostname'] = $dbconfig['host'];
             $this->default['username'] = $dbconfig['user'];

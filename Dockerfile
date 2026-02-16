@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     git \
     unzip \
-    && docker-php-ext-install intl pgsql pdo_pgsql zip gd
+    && docker-php-ext-install intl pgsql pdo_pgsql zip gd mysqli
 
 # Enable Apache rewrite module
 RUN a2enmod rewrite
