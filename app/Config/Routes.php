@@ -63,9 +63,4 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function($routes) 
     $routes->get('test-email', 'TestEmailController::sendTest');
     $routes->get('preview-email', 'TestEmailController::preview');
 
-    $routes->options('(:any)', function () {
-        $response = response();
-        $response->setStatusCode(200);
-        return $response;
-    });
 });
