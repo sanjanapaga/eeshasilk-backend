@@ -124,3 +124,6 @@ _modules/*
 
 /results/
 /phpunit*.xml
+
+# Production Uploads (Do not track or overwrite)
+public/uploads/

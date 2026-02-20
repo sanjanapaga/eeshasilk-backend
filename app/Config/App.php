@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'https://eeshasilk.com/api/backend/';
+    public string $baseURL = 'https://eeshasilk.com/api/backend/public/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.

@@ -15,11 +15,12 @@ class OrderController extends ResourceController
 
     private function ensureImageUrl(&$item)
     {
+        $base = rtrim(config('App')->baseURL, '/');
         if (!empty($item['image'])) {
             if (strpos($item['image'], 'http://') === 0 || strpos($item['image'], 'https://') === 0) {
                 $item['image_url'] = $item['image'];
             } else {
-                $item['image_url'] = base_url($item['image']);
+                $item['image_url'] = $base . '/' . ltrim($item['image'], '/');
             }
         }
     }

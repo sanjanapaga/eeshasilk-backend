@@ -20,9 +20,16 @@ class CartController extends ResourceController
             ->where('user_id', $userId)
             ->findAll();
 
+        $base = rtrim(config('App')->baseURL, '/');
         // Calculate image URLs
         foreach ($items as &$item) {
-            $item['image_url'] = base_url('uploads/products/' . $item['image']);
+            if (!empty($item['image'])) {
+                if (strpos($item['image'], 'http://') === 0 || strpos($item['image'], 'https://') === 0) {
+                    $item['image_url'] = $item['image'];
+                } else {
+                    $item['image_url'] = $base . '/' . ltrim($item['image'], '/');
+                }
+            }
         }
 
         return $this->respond([

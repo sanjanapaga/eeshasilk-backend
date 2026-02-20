@@ -1,5 +1,17 @@
 RewriteEngine On
 
+# Map uploads requests to the public directory
+RewriteRule ^uploads/(.*)$ public/uploads/$1 [L]
+
+# Map uploads requests to the public directory
+RewriteRule ^uploads/(.*)$ public/uploads/$1 [L]
+
+# Map uploads requests to the public directory
+RewriteRule ^uploads/(.*)$ public/uploads/$1 [L]
+
+# Map uploads requests to the public directory
+RewriteRule ^uploads/(.*)$ public/uploads/$1 [L]
+
 # Ensure Authorization header is passed along for JWT
 RewriteCond %{HTTP:Authorization} .
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

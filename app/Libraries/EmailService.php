@@ -30,6 +30,19 @@ class EmailService
         $this->fromEmail = $this->smtpUser;
     }
 
+    public function sendWelcomeEmail($userData)
+    {
+        $name = $userData['username'] ?? 'Valued Customer';
+        
+        return $this->sendMail(
+            $userData['email'],
+            $name,
+            'Welcome to EESHA SILKS - Registration Successful',
+            "Hi {$name},<br><br>Welcome to Eesha Silks! We are thrilled to have you join our community of silk lovers.<br><br>Login now to explore our exclusive collection of Kanjivaram, Banarasi, and Designer sarees.<br><br>Happy Shopping!<br>Team Eesha Silks",
+            "Hi {$name},\n\nWelcome to Eesha Silks! We are thrilled to have you join our community.\n\nLogin now: https://eeshasilk.com/login\n\nHappy Shopping!\nTeam Eesha Silks"
+        );
+    }
+
     public function sendOrderNotification($orderData)
     {
         return $this->sendMail(
