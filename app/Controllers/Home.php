@@ -9,13 +9,28 @@ class Home extends BaseController
     use ResponseTrait;
     public function index()
     {
-        $db = \Config\Database::connect();
-        $query = $db->query("SHOW COLUMNS FROM products");
-        $columns = $query->getResultArray();
-        echo json_encode([
-            'database' => $db->getDatabase(),
-            'columns' => $columns
+        return $this->respond([
+            'status' => 'success',
+            'message' => 'EeshaSilk Backend is running',
+            'environment' => CI_ENVIRONMENT,
+            'database' => 'connected'
         ]);
-        exit;
+    }
+
+    /**
+     * Helper to run migrations from browser
+     * URL: https://eeshasilk.com/api/backend/public/migrate
+     */
+    public function migrate()
+    {
+        $migrate = \Config\Services::migrations();
+
+        try {
+            if ($migrate->latest()) {
+                return $this->respond(['status' => 'success', 'message' => 'Migrations completed successfully']);
+            }
+        } catch (\Throwable $e) {
+            return $this->respond(['status' => 'error', 'message' => $e->getMessage()], 500);
+        }
     }
 }
