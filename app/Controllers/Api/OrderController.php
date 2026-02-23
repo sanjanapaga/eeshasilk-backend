@@ -58,19 +58,24 @@ class OrderController extends ResourceController
         $data = $this->request->getJSON(true);
 
         $orderData = [
-            'user_id'          => $data['user_id'] ?? null,
-            'customer_name'    => $data['customerName'] ?? '',
-            'customer_email'   => $data['customerEmail'] ?? '',
-            'customer_phone'   => $data['customerPhone'] ?? '',
-            'shipping_address' => is_array($data['shippingAddress']) ? json_encode($data['shippingAddress']) : ($data['shippingAddress'] ?? ''),
+            'user_id'          => $data['user_id'] ?? $data['userId'] ?? null,
+            'customer_name'    => $data['customer_name'] ?? $data['customerName'] ?? '',
+            'customer_email'   => $data['customer_email'] ?? $data['customerEmail'] ?? '',
+            'customer_phone'   => $data['customer_phone'] ?? $data['customerPhone'] ?? '',
+            'shipping_address' => $data['shipping_address'] ?? $data['shippingAddress'] ?? '',
             'subtotal'         => $data['subtotal'] ?? 0,
-            'total_amount'     => $data['total'] ?? 0,
-            'delivery_fee'     => $data['deliveryFee'] ?? 0,
+            'total_amount'     => $data['total_amount'] ?? $data['total'] ?? 0,
+            'delivery_fee'     => $data['delivery_fee'] ?? $data['deliveryFee'] ?? 0,
             'discount'         => $data['discount'] ?? 0,
             'status'           => $data['status'] ?? 'pending',
             'payment_method'   => $data['payment_method'] ?? 'cod',
             'payment_id'       => $data['payment_id'] ?? null,
         ];
+
+        // Ensure shipping_address is a string even if an array arrives
+        if (is_array($orderData['shipping_address'])) {
+            $orderData['shipping_address'] = json_encode($orderData['shipping_address']);
+        }
 
         $orderId = $this->model->insert($orderData);
 
