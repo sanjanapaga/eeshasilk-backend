@@ -42,12 +42,14 @@ class CartController extends ResourceController
     {
         $userId = $this->request->user->uid;
         $productId = $this->request->getVar('product_id');
+        $size = $this->request->getVar('size');
         $quantity = $this->request->getVar('quantity') ?? 1;
 
-        // Check if item already exists in cart
+        // Check if item already exists in cart with SAME size
         $existing = $this->model->where([
             'user_id' => $userId,
-            'product_id' => $productId
+            'product_id' => $productId,
+            'size' => $size
         ])->first();
 
         if ($existing) {
@@ -63,6 +65,7 @@ class CartController extends ResourceController
         $data = [
             'user_id'    => $userId,
             'product_id' => $productId,
+            'size'       => $size,
             'quantity'   => $quantity
         ];
 

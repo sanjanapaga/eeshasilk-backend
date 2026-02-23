@@ -88,6 +88,7 @@ class OrderController extends ResourceController
                 'product_id' => $item['id'],
                 'quantity'   => $item['quantity'],
                 'price'      => $item['price'],
+                'size'       => $item['size'] ?? null,
             ]);
         }
 

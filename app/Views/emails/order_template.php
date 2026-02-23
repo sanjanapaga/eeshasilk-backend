@@ -35,7 +35,13 @@
             <h3>Order Summary</h3>
             <?php foreach ($items as $item): ?>
             <div class="item-row">
-                <span><?= esc($item['product_name']) ?> (x<?= esc($item['quantity']) ?>)</span>
+                <span>
+                    <?= esc($item['product_name']) ?> 
+                    <?php if (!empty($item['size'])): ?>
+                        <span style="color: #6B6661; margin-left: 5px;">(Size: <?= esc($item['size']) ?>)</span>
+                    <?php endif; ?>
+                    (x<?= esc($item['quantity']) ?>)
+                </span>
                 <span>₹<?= number_format($item['price'] * $item['quantity'], 2) ?></span>
             </div>
             <?php endforeach; ?>

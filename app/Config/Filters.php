@@ -114,7 +114,6 @@ class Filters extends BaseFilters
             'api/wishlist', 'api/wishlist/*', 
             'api/cart', 'api/cart/*',
             'api/razorpay/*',
-            'api/reviews', 'api/reviews/*'
         ]]
     ];
 }

@@ -11,6 +11,10 @@ services:
         fromDatabase:
           name: eshasilk-db
           property: connectionString
+    disk:
+      name: uploads-disk
+      mountPath: /var/www/html/public/uploads
+      sizeGB: 1
 
 databases:
   - name: eshasilk-db

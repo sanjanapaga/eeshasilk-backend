@@ -1,29 +1,5 @@
 <?php
 
-// CORS Configuration
-$allowed_origins = [
-    'http://localhost:3000',
-    'https://eeshasilk-frontend-amzo.vercel.app',
-    'https://eeshasilk-frontend.vercel.app'
-];
-
-$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-
-if (in_array($origin, $allowed_origins)) {
-    header("Access-Control-Allow-Origin: $origin");
-} else {
-    // Default to first allowed origin or * if you prefer strictness
-    header("Access-Control-Allow-Origin: *");
-}
-
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Accept");
-
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    header("HTTP/1.1 200 OK");
-    exit();
-}
-
 use CodeIgniter\Boot;
 use Config\Paths;
 

@@ -2,10 +2,20 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\API\ResponseTrait;
+
 class Home extends BaseController
 {
-    public function index(): string
+    use ResponseTrait;
+    public function index()
     {
-        return view('welcome_message');
+        $db = \Config\Database::connect();
+        $query = $db->query("SHOW COLUMNS FROM products");
+        $columns = $query->getResultArray();
+        echo json_encode([
+            'database' => $db->getDatabase(),
+            'columns' => $columns
+        ]);
+        exit;
     }
 }

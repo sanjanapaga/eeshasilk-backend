@@ -33,9 +33,14 @@ class MessageController extends ResourceController
             return $this->fail($this->model->errors());
         }
 
-        // Send Email Notification
-        $emailService = new \App\Libraries\EmailService();
-        $emailService->sendContactMessage($data);
+        // Send Email Notification - wrapped in try-catch to prevent 500 errors if SMTP fails
+        try {
+            $emailService = new \App\Libraries\EmailService();
+            $emailService->sendContactMessage($data);
+        } catch (\Exception $e) {
+            log_message('error', 'Contact message email failed: ' . $e->getMessage());
+            // We still proceed to return success so the front-end doesn't show a CORS/500 error
+        }
 
         return $this->respondCreated([
             'status'  => 201,

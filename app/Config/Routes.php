@@ -45,8 +45,8 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function($routes) 
 
     // Reviews
     $routes->get('reviews', 'ReviewController::index');
-    $routes->post('reviews', 'ReviewController::create');
-    $routes->delete('reviews/(:num)', 'ReviewController::delete/$1');
+    $routes->post('reviews', 'ReviewController::create', ['filter' => 'jwt']);
+    $routes->delete('reviews/(:num)', 'ReviewController::delete/$1', ['filter' => 'jwt']);
 
     // Categories
     $routes->get('categories', 'CategoryController::index');

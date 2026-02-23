@@ -123,6 +123,7 @@ class ProductController extends ResourceController
             'price'          => $this->request->getPost('price'),
             'discount'       => $this->request->getPost('discount'),
             'category'       => $this->request->getPost('category'),
+            'sizes'          => $this->request->getPost('sizes'),
             'stock_quantity' => $this->request->getPost('stock_quantity'),
         ];
 
