@@ -52,6 +52,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function($routes) 
     // Categories
     $routes->get('categories', 'CategoryController::index');
     $routes->post('categories', 'CategoryController::create');
+    $routes->put('categories/(:num)', 'CategoryController::update/$1');
     $routes->delete('categories/(:num)', 'CategoryController::delete/$1');
 
     // Messages

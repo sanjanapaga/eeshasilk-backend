@@ -47,8 +47,6 @@ class CategoryController extends ResourceController
             $data['slug'] = url_title($data['name'], '-', true);
         }
         
-        $data['id'] = $id;
-        
         if (!$this->model->update($id, $data)) {
             return $this->fail($this->model->errors());
         }
