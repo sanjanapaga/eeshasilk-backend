@@ -45,7 +45,7 @@ class InitialSeeder extends Seeder
         // Products
         $products = [
             [
-                'name' => 'Kanjivaram Silk Saree',
+                'name' => 'Kanchipuram Silk Saree',
                 'price' => 12999,
                 'discount' => 10,
                 'category' => 'saree',
