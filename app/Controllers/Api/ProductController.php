@@ -65,6 +65,7 @@ class ProductController extends ResourceController
             $query = $query->groupStart()
                            ->like('LOWER(name)', strtolower($search))
                            ->orLike('LOWER(description)', strtolower($search))
+                           ->orLike('LOWER(category)', strtolower($search))
                            ->groupEnd();
         }
 
