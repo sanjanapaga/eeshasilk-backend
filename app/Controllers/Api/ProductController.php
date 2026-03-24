@@ -62,14 +62,31 @@ class ProductController extends ResourceController
         }
 
         if ($search) {
-            $query = $query->groupStart()
-                           ->like('LOWER(name)', strtolower($search))
-                           ->orLike('LOWER(description)', strtolower($search))
-                           ->orLike('LOWER(category)', strtolower($search))
-                           ->groupEnd();
+            $words = explode(' ', strtolower($search));
+            $query = $query->groupStart();
+            foreach ($words as $word) {
+                $word = trim($word);
+                if (empty($word)) continue;
+                
+                $singular = (strlen($word) > 3 && substr($word, -1) === 's') ? substr($word, 0, -1) : null;
+                
+                $query = $query->groupStart();
+                $query = $query->like('name', $word)
+                               ->orLike('description', $word)
+                               ->orLike('category', $word);
+                
+                if ($singular) {
+                    $query = $query->orLike('name', $singular)
+                                   ->orLike('description', $singular)
+                                   ->orLike('category', $singular);
+                }
+                $query = $query->groupEnd();
+            }
+            $query = $query->groupEnd();
         }
 
         $products = $query->findAll();
+        log_message('error', 'Search Query: ' . $search . ' | SQL: ' . (string)$this->model->db->getLastQuery());
         log_message('debug', 'Returned products count: ' . count($products));
 
         // Attach full image URL
