@@ -94,6 +94,7 @@ class OrderController extends ResourceController
                 'quantity'   => $item['quantity'],
                 'price'      => $item['price'],
                 'size'       => $item['size'] ?? null,
+                'color'      => $item['color'] ?? null,
             ]);
         }
 
@@ -114,7 +115,7 @@ class OrderController extends ResourceController
             foreach ($orderData['items'] as &$item) {
                 if (!isset($item['product_name'])) {
                     $product = $productModel->find($item['id']);
-                    $item['product_name'] = $product['name'] ?? 'Product';
+                    $item['product_name'] = (is_array($product) && isset($product['name'])) ? $product['name'] : 'Product';
                 }
             }
 

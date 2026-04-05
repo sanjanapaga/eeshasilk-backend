@@ -12,7 +12,7 @@ class OrderItemModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['order_id', 'product_id', 'size', 'quantity', 'price'];
+    protected $allowedFields    = ['order_id', 'product_id', 'size', 'color', 'quantity', 'price'];
 
     // Validation
     protected $validationRules      = [
